@@ -1,37 +1,33 @@
+import { getSpaceUntilMaxLength } from "@testing-library/user-event/dist/utils";
 import React from "react";
-
-const all_pokemon = [
-  { name: "Charizard", weight: 90 },
-  { name: "Bulbasaur", weight: 6.9 },
-  { name: "Mewtwo", weight: 122 },
-  { name: "Mega beedrill", weight: 65 },
-];
-
-const weights = all_pokemon.map((p) => {
-  return p.weight;
-});
-console.log(weights);
 
 //Use the .map method and console.log to print an array of the name + weights of
 //each of these Pokemon to the Console, like so: "Charizard: 90 kg", etc.
 
-const blah = all_pokemon.map((p) => {
-  return `${p.name}: ${p.weight} kilos`;
-});
-console.log(blah);
-
-export default function (props) {
+export default function PokeCard(props) {
   return (
-    <div>
-      <h2>{props.name}</h2>
-      <p>{props.weight} kilos</p>
-      <p>Awesome ? {props.awesome ? "Yesss" : "Nah, not awesome"}</p>
-      <p>Terrifying ? {props.terrifying ? "Aha, very!" : "Nope, kind poke!"}</p>
-      <p>Abilities:</p>
-      <p>{props.abilities.length}</p>
-      <ul>
+    <div className="card shadow-sm mb-4">
+      <div className="card-body pb-0">
+        <h5 className="card-title">{props.name}</h5>
+        <h6 className="card-subtitle mb-3 text-primary">
+          <img className="small-img" src={props.url} />
+          {props.awesome ? "An awesome Pokemon" : "Not awesome"}
+        </h6>
+        <p className="mb-0">
+          Weight: {props.weight} kg
+          <br />
+          Terrifying: {props.terrifying ? "Very" : "nah, lovable"}
+          <br />
+          {props.abilities.length} abilities
+        </p>
+      </div>
+      <ul className="list-group list-group-flush">
         {props.abilities.map((ability, index) => {
-          return <li key={index}>{ability}</li>;
+          return (
+            <li key={index} className="list-group-item">
+              {ability}
+            </li>
+          );
         })}
       </ul>
     </div>
